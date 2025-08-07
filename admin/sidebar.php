@@ -132,26 +132,39 @@
 
         <li class="nav-header text-uppercase">Action</li>
         <li class="nav-item">
-          <a href="#" class="nav-link nav-edit_user">
+          <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user-cog"></i>
             <p>
-              Admin Users
+              Users
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="./index.php?page=new_user" class="nav-link nav-new_user tree-item">
+              <a href="./index.php?page=user_list" class="nav-link nav-user_list nav-new_user nav-edit_user tree-item">
                 <i class="fas fa-angle-right nav-icon"></i>
-                <p>Add New</p>
+                <p>Admin Users List</p>
               </a>
             </li>
-            <li class="nav-item">
+             <li class="nav-item">
+              <a href="./index.php?page=dean_users_list" class="nav-link nav-dean_users_list nav-new_dean_user nav-edit_dean_user tree-item">
+                <i class="fas fa-angle-right nav-icon"></i>
+                <p>Dean Users List</p>
+              </a>
+            </li>
+
+              <li class="nav-item">
+              <a href="./index.php?page=BAO_users_list" class="nav-link nav-BAO_users_list nav-new_bao_user nav-edit_bao_user tree-item">
+                <i class="fas fa-angle-right nav-icon"></i>
+                <p>BAO Users List</p>
+              </a>
+            </li>
+            <!-- <li class="nav-item">
               <a href="./index.php?page=user_list" class="nav-link nav-user_list tree-item">
                 <i class="fas fa-angle-right nav-icon"></i>
                 <p>List</p>
               </a>
-            </li>
+            </li> -->
           </ul>
         </li>
 

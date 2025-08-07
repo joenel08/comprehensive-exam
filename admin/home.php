@@ -38,7 +38,7 @@
 
       <div class="info-box-content">
         <span class="info-box-text">Total Passed</span>
-        <span class="info-box-number">678</span>
+        <span class="info-box-number"> <?php echo $conn->query("SELECT * from student_grade_status where grade_status = 'passed' and academic_id = '{$_SESSION['academic']['id']}'")->num_rows; ?></span>
       </div>
       <!-- /.info-box-content -->
     </div>
@@ -55,7 +55,7 @@
 
       <div class="info-box-content">
         <span class="info-box-text">Total Failed</span>
-        <span class="info-box-number">760</span>
+        <span class="info-box-number"><?php echo $conn->query("SELECT * from student_grade_status where grade_status = 'failed' and academic_id = '{$_SESSION['academic']['id']}'")->num_rows; ?></span>
       </div>
       <!-- /.info-box-content -->
     </div>

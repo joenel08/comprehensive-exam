@@ -182,8 +182,17 @@ if($action == 'save_subject_grades'){
 		echo $save;
 }
 
+if($action == 'save_user_dean'){
+	$save = $crud->save_user_dean();
+	if($save)
+		echo $save;
+}
 
-
+if($action == 'save_user_bao'){
+	$save = $crud->save_user_bao();
+	if($save)
+		echo $save;
+}
 
 ob_end_flush();
 ?>

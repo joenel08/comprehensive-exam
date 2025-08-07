@@ -121,6 +121,84 @@ class Action
 			return 1;
 		}
 	}
+
+	function save_user_dean()
+	{
+		extract($_POST);
+		$data = "";
+		foreach ($_POST as $k => $v) {
+			if (!in_array($k, array('id', 'cpass', 'password')) && !is_numeric($k)) {
+				if (empty($data)) {
+					$data .= " $k='$v' ";
+				} else {
+					$data .= ", $k='$v' ";
+				}
+			}
+		}
+		if (!empty($password)) {
+			$data .= ", password=md5('$password') ";
+
+		}
+		$check = $this->db->query("SELECT * FROM dean_users where email ='$email' " . (!empty($id) ? " and id != {$id} " : ''))->num_rows;
+		if ($check > 0) {
+			return 2;
+			exit;
+		}
+		if (isset($_FILES['img']) && $_FILES['img']['tmp_name'] != '') {
+			$fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['img']['name'];
+			$move = move_uploaded_file($_FILES['img']['tmp_name'], 'assets/uploads/' . $fname);
+			$data .= ", avatar = '$fname' ";
+
+		}
+		if (empty($id)) {
+			$save = $this->db->query("INSERT INTO dean_users set $data");
+		} else {
+			$save = $this->db->query("UPDATE dean_users set $data where id = $id");
+		}
+
+		if ($save) {
+			return 1;
+		}
+	}
+
+		function save_user_bao()
+	{
+		extract($_POST);
+		$data = "";
+		foreach ($_POST as $k => $v) {
+			if (!in_array($k, array('id', 'cpass', 'password')) && !is_numeric($k)) {
+				if (empty($data)) {
+					$data .= " $k='$v' ";
+				} else {
+					$data .= ", $k='$v' ";
+				}
+			}
+		}
+		if (!empty($password)) {
+			$data .= ", password=md5('$password') ";
+
+		}
+		$check = $this->db->query("SELECT * FROM bao_users where email ='$email' " . (!empty($id) ? " and id != {$id} " : ''))->num_rows;
+		if ($check > 0) {
+			return 2;
+			exit;
+		}
+		if (isset($_FILES['img']) && $_FILES['img']['tmp_name'] != '') {
+			$fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['img']['name'];
+			$move = move_uploaded_file($_FILES['img']['tmp_name'], 'assets/uploads/' . $fname);
+			$data .= ", avatar = '$fname' ";
+
+		}
+		if (empty($id)) {
+			$save = $this->db->query("INSERT INTO bao_users set $data");
+		} else {
+			$save = $this->db->query("UPDATE bao_users set $data where id = $id");
+		}
+
+		if ($save) {
+			return 1;
+		}
+	}
 	function signup()
 	{
 		extract($_POST);
@@ -668,17 +746,18 @@ class Action
 
 	function save_grade_status()
 	{
+		$academic_id = $_SESSION['academic']['id'];
 		$student_id = $_POST['student_id'];
 		$grade_status = $_POST['grade_status'];
 		$remarks = $_POST['remarks'];
 
 		// Check if this student already has a grade status record
-		$stmt_select = $this->db->prepare("SELECT sg_id FROM student_grade_status WHERE student_id = ?");
+		$stmt_select = $this->db->prepare("SELECT sg_id FROM student_grade_status WHERE student_id = ? and academic_id = ?");
 		if (!$stmt_select) {
 			echo "Prepare failed: (" . $this->db->errno . ") " . $this->db->error;
 			exit;
 		}
-		$stmt_select->bind_param("i", $student_id);
+		$stmt_select->bind_param("ii", $student_id, $academic_id);
 		$stmt_select->execute();
 		$stmt_select->store_result();
 
@@ -700,12 +779,12 @@ class Action
 			$stmt_update->close();
 		} else {
 			// No record exists, so insert a new one.
-			$stmt_insert = $this->db->prepare("INSERT INTO student_grade_status (student_id, grade_status, remarks, date_marked) VALUES (?, ?, ?, NOW())");
+			$stmt_insert = $this->db->prepare("INSERT INTO student_grade_status (academic_id, student_id, grade_status, remarks, date_marked) VALUES (?, ?, ?, ?, NOW())");
 			if (!$stmt_insert) {
 				echo "Prepare failed: (" . $this->db->errno . ") " . $this->db->error;
 				exit;
 			}
-			$stmt_insert->bind_param("iss", $student_id, $grade_status, $remarks);
+			$stmt_insert->bind_param("iiss", $academic_id, $student_id, $grade_status, $remarks);
 			$stmt_insert->execute();
 
 			if ($stmt_insert->affected_rows > 0) {
