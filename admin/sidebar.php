@@ -192,7 +192,7 @@
 
 <script>
   $('#manage_account').click(function () {
-    uni_modal('Manage Account', 'manage_user.php?id=<?php echo $_SESSION['login_id'] ?>')
+    uni_modal('Manage Account', '<?php echo $_SESSION['login_view_folder'] ?>manage_user.php?id=<?php echo $_SESSION['login_id'] ?>')
   })
 </script>
 <script>

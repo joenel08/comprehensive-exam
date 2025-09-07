@@ -167,6 +167,7 @@
 						LEFT JOIN academic_list al ON al.id = el.academic_id
 						where al.id = '{$_SESSION['academic']['id']}'
 					");
+					if($aqry->num_rows > 0){
 						while ($arow = $aqry->fetch_assoc()): ?>
 
 							<!-- <p> <?php echo $arow['exam_level'] ?></p> -->
@@ -177,6 +178,9 @@
 
 							<?php
 						endwhile;
+					}else{
+						echo 'No Exam Date Yet!';
+					}
 
 						?>
 					</div>

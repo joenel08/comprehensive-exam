@@ -3,8 +3,9 @@ include('../db_connect.php');
 session_start();
 if (isset($_GET['id'])) {
 
-	$user = $conn->query("SELECT * FROM dean_users
-	where id =" . $_GET['id']);
+	$user = $conn->query("SELECT * FROM users u
+	
+	where u.id =" . $_GET['id']);
 	foreach ($user->fetch_array() as $k => $v) {
 		$meta[$k] = $v;
 	}
@@ -16,66 +17,44 @@ if (isset($_GET['id'])) {
 	<form action="" id="manage-user">
 		<input type="hidden" name="id" value="<?php echo isset($meta['id']) ? $meta['id'] : '' ?>">
 
-		<div class="row">
-			
-
-			<div class="col-sm">
-				<div class="form-group">
-					<label for="name">School ID</label>
-					<input type="text" name="school_id" id="school_id" class="form-control"
-						value="<?php echo isset($meta['school_id']) ? $meta['school_id'] : '' ?>" required>
-				</div>
-			</div>
-
 		
-		</div>
 
-
-
-		<div class="row">
-			<div class="col-sm">
+			
 				<div class="form-group">
 					<label for="name">Ext. Name</label>
 					<input type="text" name="extname" id="extname" class="form-control w-100"
 						value="<?php echo isset($meta['extname']) ? $meta['extname'] : '' ?>" required>
 				</div>
-			</div>
-
-			<div class="col-sm">
+			
 				<div class="form-group">
 					<label for="name">First Name</label>
 					<input type="text" name="firstname" id="firstname" class="form-control w-100"
 						value="<?php echo isset($meta['firstname']) ? $meta['firstname'] : '' ?>" required>
 				</div>
-			</div>
-
-			<div class="col-sm">
+			
 				<div class="form-group">
 					<label for="name">Middle Name <span class="text-sm text-muted text-italic">(optional)</span></label>
 					<input type="text" name="middlename" id="middlename" class="form-control w-100"
 						value="<?php echo isset($meta['middlename']) ? $meta['middlename'] : '' ?>">
 				</div>
-			</div>
-
-			<div class="col-sm">
+			
 				<div class="form-group">
 					<label for="name">Last Name</label>
 					<input type="text" name="lastname" id="lastname" class="form-control"
 						value="<?php echo isset($meta['lastname']) ? $meta['lastname'] : '' ?>" required>
 				</div>
-			</div>
-		</div>
+			
 
-		<!-- <div class="row">
-			<div class="col">
+		<div class="row">
+			<!-- <div class="col">
 				<div class="form-group">
 					<label for="">Phone Number</label>
 					<input type="text" name="mobile_number" id="mobile_number" class="form-control"
 						value="<?php echo isset($meta['mobile_number']) ? $meta['mobile_number'] : '' ?>" required>
 				</div>
-			</div>
+			</div> -->
 
-			<div class="col">
+			<!-- <div class="col">
 				<div class="form-group">
 					<label for="">Marital Status</label>
 					<select name="marital_status" id="marital_status" class="form-control" required>
@@ -86,8 +65,8 @@ if (isset($_GET['id'])) {
 						<option value="Divorced" <?= (isset($meta['marital_status']) && $meta['marital_status'] == 'Divorced') ? 'selected' : '' ?>>Divorced</option>
 					</select>
 				</div>
-			</div>
-		</div> -->
+			</div> -->
+		</div>
 
 
 		<div class="form-group">
@@ -128,7 +107,7 @@ if (isset($_GET['id'])) {
 		e.preventDefault();
 		start_load()
 		$.ajax({
-			url: 'ajax.php?action=save_user_dean',
+			url: 'ajax.php?action=save_student',
 			data: new FormData($(this)[0]),
 			cache: false,
 			contentType: false,

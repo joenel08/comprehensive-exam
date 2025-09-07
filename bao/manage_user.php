@@ -128,7 +128,7 @@ if (isset($_GET['id'])) {
 		e.preventDefault();
 		start_load()
 		$.ajax({
-			url: 'ajax.php?action=save_student',
+			url: 'ajax.php?action=save_user_bao',
 			data: new FormData($(this)[0]),
 			cache: false,
 			contentType: false,

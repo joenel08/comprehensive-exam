@@ -53,7 +53,16 @@ $exam = $conn->query("SELECT * FROM exam_list WHERE academic_id = '$academic_id'
 
                     <div class="col">
                         <p class="m-0">COURSE: <?= $program['programFullDesc'] ?> (<?= $program['program_abbrv'] ?>)</p>
-                        <p class="m-0">DATE OF EXAM: <?= date('F d, Y', strtotime($exam['exam_date'])) ?></p>
+                        <p class="m-0">DATE OF EXAM:
+                            <?php
+                            if (!empty($exam) && !empty($exam['exam_date'])) {
+                                echo date('F d, Y', strtotime($exam['exam_date']));
+                            } else {
+                                echo 'Exam Not Set Yet!';
+                            }
+                            ?>
+                        </p>
+
                         <p class="m-0">CONTACT NO: <?= $student['mobile_number'] ?></p>
 
                     </div>
