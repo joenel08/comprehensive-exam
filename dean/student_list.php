@@ -99,7 +99,7 @@
 
 							<td>
 								<span
-									class="badge badge-<?php echo ($row['payment_status'] === 'Verified') ? 'success' : (($row['payment_status'] === 'Pending') ? 'warning' : 'danger'); ?>">
+									class="badge badge-<?php echo ($row['payment_status'] === 'Paid') ? 'success' : (($row['payment_status'] === 'pending') ? 'warning' : 'danger'); ?>">
 									<?php echo $row['payment_status'] ?? 'N/A'; ?>
 								</span><br>
 								<small><?php echo $row['payment_notes']; ?></small><br>

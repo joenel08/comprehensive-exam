@@ -86,6 +86,10 @@ data-id='" . $student_id . "'>Request Balance Checking</a>";
   </div>
 </div>
 <?php
+// Initialize to avoid undefined variable warnings
+$verdict = '';
+$approval_notes = '';
+$date_of_approval = '';
 
 $verdict_qry = $conn->query("SELECT * FROM dean_approval WHERE student_id = '$student_id'");
 if ($verdict_qry && $verdict_qry->num_rows > 0) {
@@ -105,16 +109,23 @@ if ($verdict_qry && $verdict_qry->num_rows > 0) {
     <span aria-hidden="true">&times;</span>
   </button>
   <h4 class="alert-heading font-weight-bold">Dean's Approval</h4>
-  <p class="m-0">Final Verdict: <span class="font-weight-bold"><?php echo $verdict ?></span></p>
-  <p class="m-0">Additional Notes: <span class="font-weight-bold"><?php echo $approval_notes ?></span></p>
-  <p class="m-0">Date of Approval: <span class="font-weight-bold"><?php echo $date_of_approval ?></span></p>
-
-
+  <p class="m-0">Final Verdict:
+    <span class="font-weight-bold"><?php echo !empty($verdict) ? $verdict : 'Pending'; ?></span>
+  </p>
+  <p class="m-0">Additional Notes:
+    <span class="font-weight-bold"><?php echo !empty($approval_notes) ? $approval_notes : 'N/A'; ?></span>
+  </p>
+  <p class="m-0">Date of Approval:
+    <span
+      class="font-weight-bold"><?php echo !empty($date_of_approval) ? $date_of_approval : 'Not yet approved'; ?></span>
+  </p>
 
   <hr>
-  <p class="mb-0">For any concerns or queries, please go to the Dean's Office for guidance. You may apply for the comprehensive exam now. Click the link below!</p>
+  <p class="mb-0">For any concerns or queries, please go to the Dean's Office for guidance. You may apply for the
+    comprehensive exam now. Click the link below!</p>
   <a href="./index.php?page=comprehensive_examination_form" class="">Comprehensive Examination Form</a>
 </div>
+
 
 <div class="row">
   <div class="col">
@@ -139,7 +150,7 @@ if ($verdict_qry && $verdict_qry->num_rows > 0) {
 </div>
 
 
-<a href="./index.php?page=over_all_form" class="btn btn-success btn-flat">Download Form</a>
+<a href="./index.php?page=download_form&student_id=<?php echo $_SESSION['login_id'] ?>" class="btn btn-success btn-flat">Download Form</a>
 <script>
   $(document).ready(function () {
 

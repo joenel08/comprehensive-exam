@@ -20,18 +20,18 @@
     <li class="nav-item">
       <a class="nav-link" data-widget="pushmenu" href="" role="button"><i class="fas fa-bars"></i></a>
     </li>
-    <li >
-      <a class="nav-link d-none d-sm-block" href="./"  role="button"> Comprehensive Examination</a>
+    <li>
+      <a class="nav-link d-none d-sm-block" href="./" role="button"> Comprehensive Examination</a>
     </li>
   </ul>
 
   <ul class="navbar-nav ml-auto">
 
     <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
+      <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+        <i class="fas fa-expand-arrows-alt"></i>
+      </a>
+    </li>
     <!-- <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
         <i class="far fa-bell"></i>
@@ -56,22 +56,26 @@
       <a class="nav-link" data-toggle="dropdown" aria-expanded="true" href="javascript:void(0)">
         <span>
           <div class="d-flex badge-pill">
- <span class="mr-2"><img src="assets/uploads/<?php echo $_SESSION['login_avatar'] ?>" alt=""
-                class="user-img border "></span>
-            <span><b><?php echo ucwords($_SESSION['login_firstname']).' '.$_SESSION['login_lastname'] ?></b> <?php
-            if($_SESSION["login_table"] === 'admin'){
-              echo 'Administrator&nbsp;&nbsp; ';
-            }elseif($_SESSION["login_table"] === 'student')
-            {
-              echo 'Student&nbsp;&nbsp;';
-            }elseif($_SESSION["login_table"] === 'dean'){
-              echo 'Dean&nbsp;&nbsp;';
-            }elseif($_SESSION["login_table"] === 'bao'){
-              echo 'Bao&nbsp;&nbsp;';
-            }
-            
-            ?></span>
-           
+            <?php
+            $avatar = !empty($_SESSION['login_avatar']) ? $_SESSION['login_avatar'] : '1608081180_avatar.jpg';
+            ?>
+            <span class="mr-2">
+              <img src="assets/uploads/<?php echo $avatar ?>" alt="" class="user-img border">
+            </span>
+
+            <span><b><?php echo ucwords($_SESSION['login_firstname']) . ' ' . $_SESSION['login_lastname'] ?></b> <?php
+                   if ($_SESSION["login_table"] === 'admin') {
+                     echo 'Administrator&nbsp;&nbsp; ';
+                   } elseif ($_SESSION["login_table"] === 'student') {
+                     echo 'Student&nbsp;&nbsp;';
+                   } elseif ($_SESSION["login_table"] === 'dean') {
+                     echo 'Dean&nbsp;&nbsp;';
+                   } elseif ($_SESSION["login_table"] === 'bao') {
+                     echo 'Bao&nbsp;&nbsp;';
+                   }
+
+                   ?></span>
+
             <!-- <span class="fa fa-angle-down ml-2"></span> -->
           </div>
         </span>

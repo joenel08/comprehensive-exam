@@ -1,4 +1,5 @@
 <?php include 'db_connect.php'; ?>
+
 <div class="col-lg-12">
 	<div class="card">
 		<div class="card-header">
@@ -59,7 +60,7 @@
 							<td><?php echo $row['email']; ?></td>
 							<td>
 								<span
-									class="badge badge-<?php echo ($row['payment_status'] === 'Verified') ? 'success' : (($row['payment_status'] === 'Pending') ? 'warning' : 'danger'); ?>">
+									class="badge badge-<?php echo ($row['payment_status'] === 'Paid') ? 'success' : (($row['payment_status'] === 'pending') ? 'warning' : 'danger'); ?>">
 									<?php echo $row['payment_status']; ?>
 								</span>
 							</td>
